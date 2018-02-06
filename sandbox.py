@@ -78,4 +78,4 @@ nlp = spacy.load('en', disable=['parser', 'ner'])
 utt = nlp(u"I also know the best words")
 for token in utt:
     #print(token.text, token.lemma_, token.pos_, token.tag_, token.dep_, token.shape_, token.is_alpha, token.is_stop)
-    print(token.text, token.lemma_, str(token.pos_), token.tag_, token.dep_, token.shape_, token.is_alpha, token.is_stop)
+    print(token.text, token.lemma_, token.tag_, token.shape_, token.is_alpha, token.is_stop)
