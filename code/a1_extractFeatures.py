@@ -192,28 +192,20 @@ def extract1( comment ):
         if(tags[index][-1] == '\n'):
             sentences = sentences + 1
             
-        #Feature 18, 21 AoA
+		#Feature 18, 21 AoA
         if(word in bristolNorms):
             aoaList.append(float(bristolNorms[word][3]))
-        
-        #Feature 19, 22 IMG
-        if(word in bristolNorms):
+            #Feature 19, 22 IMG
             imgList.append(float(bristolNorms[word][4]))
-            
-        #Feature 20, 23 FAM
-        if(word in bristolNorms):
+            #Feature 20, 23 FAM
             famList.append(float(bristolNorms[word][5]))
         
         #Feature 24, 27 V.Mean.Sum
         if(word in ratings):
             vmeansumList.append(float(ratings[word][2]))
-        
-        #Feature 25, 28 A.Mean.Sum
-        if(word in ratings):
+            #Feature 25, 28 A.Mean.Sum
             ameansumList.append(float(ratings[word][5]))
-        
-        #Feature 26, 29 D.Mean.Sum
-        if(word in ratings):
+            #Feature 26, 29 D.Mean.Sum
             dmeansumList.append(float(ratings[word][8]))
         
         index = index + 1
