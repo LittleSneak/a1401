@@ -130,44 +130,38 @@ def class31(filename):
         cms = [linearCM, rbfCM, forestCM, mlpCM, adaboostCM]
         
         #Iterate through CMs and write them
-        #Scores keeps track of the score for deciding the best classifier later
-        scores = []
+        #Keep track of accuracies for 3.2
+        accList = []
         for index in range(0, 5):
-            score = 0
-            newScore = accuracy(cms[index])
-            score = score + newScore
+            acc = accuracy(cms[index])
             
             row = [str(index + 1)]
             #Accuracy
-            row.append(str(newScore))
+            row.append(str(acc))
             
             newScore = recall(cms[index])
             for x in range(0, 4):
-                score = score + newScore[x]
                 row.append(str(newScore[x]))
                 
             newScore = precision(cms[index])
             for x in range(0, 4):
-                score = score + newScore[x]
                 row.append(str(newScore[x]))
             
             for x in range(0, 4):
                 for y in range(0, 4):
                     row.append(str(cms[index][x][y]))
             writer.writerow(row)
-            scores.append(score)
+            accList.append(acc)
             
     #Find the best classifier
     maxIndex = 0
-    maxScore = 0
+    maxAcc = 0
     for index in range(0, 5):
-        if(scores[index] > maxScore):
+        if(accList[index] > maxAcc):
             maxIndex = index
-            maxScore = scores[index]
-    print(scores)
-    print(index)
+            maxAcc = accList[index]
 
-    return (X_train, X_test, y_train, y_test, index)
+    return (X_train, X_test, y_train, y_test, maxIndex)
 
 
 def class32(X_train, X_test, y_train, y_test, iBest):
@@ -184,7 +178,39 @@ def class32(X_train, X_test, y_train, y_test, iBest):
        X_1k: numPy array, just 1K rows of X_train
        y_1k: numPy array, just 1K rows of y_train
    '''
-    print('TODO Section 3.2')
+    #Obtain the best classifier to use
+    if(iBest == 0):
+        classifier = linear = LinearSVC()
+    elif(iBest == 1):
+        classifier = rb = SVC(kernel = 'rbf', gamma = 2)
+    elif(iBest == 2):
+        classifier = RandomForestClassifier(max_depth=5, n_estimators=10)
+    elif(iBest == 3):
+        classifier = MLPClassifier(alpha = 0.05)
+    else:
+        classifier = AdaBoostClassifier()
+    
+    #Test each one
+    train_sizes = [1000, 5000, 10000, 15000, 20000]
+    accList = []
+    for size in train_sizes:
+        X_traint, X_testt, y_traint, y_testt = train_test_split(X, Y, test_size=size)
+        #Keep the 1k train sizes for return
+        if(size == 1000):
+            X_1k = x_traint
+            y_1k = y_traint
+        #Perform fitting and accuracy calculations
+        classifier.fit(X_traint, y_traint.ravel())
+        accList.append(accuracy(confusion_matrix(y_test, classifier.predict(X_testt))))
+    print(accList)
+    
+    #Write to a csv file
+    with open('a1_3.2.csv', 'w') as csvfile:
+        writer = csv.writer(csvfile)
+        row = []
+        for item in accList:
+            row.append(str(item))
+        writer.writerow(row)
 
     return (X_1k, y_1k)
     
@@ -217,4 +243,5 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # TODO : complete each classification experiment, in sequence.
-    class31(args.input)
+    results31 = class31(args.input)
+    class32(results31[0], results31[1], results31[2], results31[3], results31[4])
