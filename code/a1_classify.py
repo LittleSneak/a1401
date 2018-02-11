@@ -51,7 +51,7 @@ def class31(filename):
     predictions2 = rb.predict(X_test)
     
     #Random Forest Classifier. max depth = 5 and 10 estimators
-    forest = RandomForestClassifier(max_depth=5, n_estimators = 10)
+    forest = RandomForestClassifier(max_depth=5, n_estimators=10)
     forest.fit(X_train, y_train.ravel())
     predictions3 = forest.predict(X_test)
     
