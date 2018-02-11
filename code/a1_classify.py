@@ -14,7 +14,15 @@ import os
 
 def accuracy( C ):
     ''' Compute accuracy given Numpy array confusion matrix C. Returns a floating point value '''
-    print ('TODO')
+    rightSum = 0
+    totalSum = 0
+    for x in range(0, len(C)):
+        for y in range(0, len(C[0])):
+            if(x == y):
+                rightSum = rightSum + C[x][y]
+            totalSum = totalSum + C[x][y]
+    print(rightSum, totalSum)
+    return rightSum / totalSum
 
 def recall( C ):
     ''' Compute recall given Numpy array confusion matrix C. Returns a list of floating point values '''
@@ -44,6 +52,7 @@ def class31(filename):
     Y = data[:, 173:]
     X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.8)
     
+    #Run all 5 classifiers
     #Linear SVC. Using LinearSVC instead of SVC since it is much faster
     print("Processing Linear")
     linear = LinearSVC()
@@ -74,12 +83,14 @@ def class31(filename):
     adaboost.fit(X_train, y_train.ravel())
     predictions5 = adaboost.predict(X_test)
     
+    #Obtain confusion matrices
     linearCM = confusion_matrix(y_test, predictions1)
     rbfCM = confusion_matrix(y_test, predictions2)
     forestCM = confusion_matrix(y_test, predictions3)
     mlpCM = confusion_matrix(y_test, predictions4)
     adaboostCM = confusion_matrix(y_test, predictions5)
     
+    print(accuracy(linearCM))
     print(linearCM)
     
     #return (X_train, X_test, y_train, y_test, iBest)
