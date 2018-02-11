@@ -83,8 +83,9 @@ def class34( filename, i ):
     print('TODO Section 3.4')
     
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description='Process each .')
     parser.add_argument("-i", "--input", help="the input npz file from Task 2", required=True)
     args = parser.parse_args()
 
     # TODO : complete each classification experiment, in sequence.
-    class31("feat.out.npz")
+    class31(args.input)
