@@ -276,12 +276,12 @@ def class33(X_train, X_test, y_train, y_test, i, X_1k, y_1k):
     accList = []
     
     print("Running classifier for 1k")
-    best5_1k = np.hstack((best5_1k, y_1k.ravel()))
+    best5_1k = np.hstack((best5_1k, y_1k))
     print(best5_1k)
     
     X = best5_1k[:, :5]
     Y = best5_1k[:, 5:]
-    xtr, xte, ytr, yte = train_test_split(X, Y, test_size=1.0)    
+    xtr, xte, ytr, yte = train_test_split(X, Y, test_size=1.0)
     
     classifier.fit(xtr, ytr.ravel())
     predictions1k = classifier.predict(X_test)
