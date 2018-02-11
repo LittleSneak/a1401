@@ -92,13 +92,13 @@ def class31(filename):
     #Run all 5 classifiers
     #Linear SVC. Using LinearSVC instead of SVC since it is much faster
     print("Processing Linear")
-    linear = LinearSVC(max_iter=10)
+    linear = LinearSVC(max_iter=10000)
     linear.fit(X_train, y_train.ravel())
     predictions1 = linear.predict(X_test)
     
     #Radial basis function, gamma = 2
     print("Processing radial basis")
-    rb = SVC(kernel = 'rbf', gamma = 2, max_iter=10)
+    rb = SVC(kernel = 'rbf', gamma = 2, max_iter=10000)
     rb.fit(X_train, y_train.ravel())
     predictions2 = rb.predict(X_test)
     
@@ -185,10 +185,10 @@ def class32(X_train, X_test, y_train, y_test, iBest):
     #Obtain the best classifier to use
     print("Beginning 3.2")
     if(iBest == 0):
-        classifier = linear = LinearSVC(max_iter=10)
+        classifier = linear = LinearSVC(max_iter=10000)
         print("Linear chosen")
     elif(iBest == 1):
-        classifier = rb = SVC(kernel = 'rbf', gamma = 2, max_iter = 10)
+        classifier = rb = SVC(kernel = 'rbf', gamma = 2, max_iter = 10000)
         print("Radial basis chosen")
     elif(iBest == 2):
         classifier = RandomForestClassifier(max_depth=5, n_estimators=10)
@@ -201,7 +201,7 @@ def class32(X_train, X_test, y_train, y_test, iBest):
         print("Ada boost chosen")
     
     #Test each one
-    train_sizes = [1000, 1000, 1000, 1000, 1000]
+    train_sizes = [1000, 5000, 10000, 15000, 20000]
     accList = []
     for size in train_sizes:
         print("Processing size " + str(size))
@@ -348,13 +348,13 @@ def class34( filename, i ):
         #Run all 5 classifiers
         #Linear SVC. Using LinearSVC instead of SVC since it is much faster
         print("Processing Linear")
-        linear = LinearSVC(max_iter=10)
+        linear = LinearSVC(max_iter=10000)
         linear.fit(X_train, y_train.ravel())
         predictions1 = linear.predict(X_test)
         
         #Radial basis function, gamma = 2
         print("Processing radial basis")
-        rb = SVC(kernel = 'rbf', gamma = 2, max_iter=10)
+        rb = SVC(kernel = 'rbf', gamma = 2, max_iter=10000)
         rb.fit(X_train, y_train.ravel())
         predictions2 = rb.predict(X_test)
         
@@ -437,8 +437,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # TODO : complete each classification experiment, in sequence.
-    #results31 = class31(args.input)
-    #results32 = class32(results31[0], results31[1], results31[2], results31[3], results31[4])
-    #class33(results31[0], results31[1], results31[2], results31[3], results31[4], results32[0], results32[1])
-    #class34(args.input, results31[4]
-    class34(args.input, 4)
+    results31 = class31(args.input)
+    results32 = class32(results31[0], results31[1], results31[2], results31[3], results31[4])
+    class33(results31[0], results31[1], results31[2], results31[3], results31[4], results32[0], results32[1])
+    class34(args.input, results31[4])
