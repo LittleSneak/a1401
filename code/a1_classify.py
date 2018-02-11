@@ -36,9 +36,9 @@ def class31(filename):
     data = np.load(filename)['arr_0']
     X = data[:, :173]
     Y = data[:, 173:]
-        
-    print(len(data), len(X), len(X[0]))
-    print(len(data), len(Y), len(Y[0]))
+    X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.33, random_state=42)
+    print(X_train)
+    
     return 0
     #return (X_train, X_test, y_train, y_test, iBest)
 
