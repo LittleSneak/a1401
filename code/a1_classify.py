@@ -276,8 +276,12 @@ def class33(X_train, X_test, y_train, y_test, i, X_1k, y_1k):
     accList = []
     
     print("Running classifier for 1k")
-    np.append(best5_1k, y_1k.ravel())
-    print(best5_1k)
+    print(np.append(best5_1k, y_1k.ravel()))
+    
+    X = data[:, :5]
+    Y = data[:, 5:]
+    X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2)    
+    
     classifier.fit(best5_1k, y_1k.ravel())
     predictions1k = classifier.predict(X_test)
     cm1k = confusion_matrix(y_test, predictions1k)
