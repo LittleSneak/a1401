@@ -71,7 +71,7 @@ def extract1( comment ):
         feats : numpy Array, a 173-length vector of floating point features (only the first 29 are expected to be filled, here)
     '''
     
-    features = np.zeros((1, 173))
+    features = np.zeros((1, 173 + 1))
     #First find number of sentences
     index = 0
     sentences = 0
