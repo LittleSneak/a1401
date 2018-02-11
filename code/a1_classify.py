@@ -327,9 +327,13 @@ def class34( filename, i ):
     kf = KFold(n_splits = 5, shuffle = True)
     for train_index, test_index in kf.split(X):
         print("TRAIN:", train_index, "TEST:", test_index)
-        X_train, X_test = X[train_index], X[test_index]
-        y_train, y_test = y[train_index], y[test_index]
+        #Extract specific rows to get training and testing data
+        X_train = X[train_index, :]
+        X_test = X[test_index, :]
+        y_train = Y[train_index, :]
+        y_test = Y[test_index, :]        
         print(X_train, y_train)
+        print(X, Y)
     
     
     return 0
