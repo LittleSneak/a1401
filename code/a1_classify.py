@@ -41,21 +41,23 @@ def class31(filename):
     X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.8)
     
     #Linear SVC
-    linear = SVC()
+    linear = SVC(kernel = 'linear')
     linear.fit(X_train, y_train.ravel())
-    SVC(kernel = 'linear')
     predictions1 = linear.predict(X_test)
     
     #Radial basis function, gamma = 2
-    rb = SVC()
+    rb = SVC(kernel = 'rbf', gamma = 2)
     rb.fit(X_train, y_train.ravel())
-    SVC(kernel = 'rbf', gamma = 2)
     predictions2 = rb.predict(X_test)
     
     #Random Forest Classifier. max depth = 5 and 10 estimators
     forest = RandomForestClassifier(max_depth=5, n_estimators = 10)
     forest.fit(X_train, y_train.ravel())
-    print(forest.predict(X_test))
+    predictions3 = forest.predict(X_test)
+    
+    print(predictions1)
+    print(predictions2)
+    print(predictions3)
     
     #return (X_train, X_test, y_train, y_test, iBest)
 
