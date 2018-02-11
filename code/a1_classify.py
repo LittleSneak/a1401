@@ -34,7 +34,7 @@ def class31(filename):
     '''
     #Load the npy from the file
     data = np.load(filename)['arr_0']
-    X = data[:, :173]
+    X = data[:, :]
         
     print(data.size, X.size, X[0].size)
     return 0
