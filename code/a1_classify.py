@@ -201,7 +201,7 @@ def class32(X_train, X_test, y_train, y_test, iBest):
             y_1k = y_traint
         #Perform fitting and accuracy calculations
         classifier.fit(X_traint, y_traint.ravel())
-        accList.append(accuracy(confusion_matrix(y_test, classifier.predict(X_testt))))
+        accList.append(accuracy(confusion_matrix(y_testt, classifier.predict(X_testt))))
     print(accList)
     
     #Write to a csv file
