@@ -243,6 +243,8 @@ def class33(X_train, X_test, y_train, y_test, i, X_1k, y_1k):
         selector = SelectKBest(f_classif, k)
         X_new32k = selector.fit_transform(X_train, y_train.ravel())
         pp = selector.pvalues_
+        
+        selector = SelectKBest(f_classif, k)
         X_new1k = selector.fit_transform(X_1k, y_1k.ravel())
         #Save X_new for 5 best features for step 2
         if(k == 5):
@@ -276,16 +278,13 @@ def class33(X_train, X_test, y_train, y_test, i, X_1k, y_1k):
     accList = []
     
     print("Running classifier for 1k")
-    best5_1k = np.hstack((best5_1k, y_1k))
+    
     print(best5_1k)
+    print(len(best5_1k))
     
-    X = best5_1k[:, :5]
-    Y = best5_1k[:, 5:]
-    xtr, xte, ytr, yte = train_test_split(X, Y, test_size=1.0)
-    
-    classifier.fit(xtr, ytr.ravel())
+    classifier.fit(best5_1k, y_1k.ravel())
     predictions1k = classifier.predict(X_test)
-    cm1k = confusion_matrix(yte, predictions1k)
+    cm1k = confusion_matrix(y_test, predictions1k)
     accList.append(str(accuracy(cm1k)))
     
     #Train 5 best features for 32k
