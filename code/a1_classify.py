@@ -212,6 +212,7 @@ def class32(X_train, X_test, y_train, y_test, iBest):
         classifier.fit(X_traint, y_traint.ravel())
         accList.append(accuracy(confusion_matrix(y_testt, classifier.predict(X_testt))))
     
+    
     #Write to a csv file
     with open('a1_3.2.csv', 'w') as csvfile:
         writer = csv.writer(csvfile)
@@ -236,12 +237,64 @@ def class33(X_train, X_test, y_train, y_test, i, X_1k, y_1k):
     '''
     #Go through each k value
     print("Beginning 3.3")
+    #Stores rows to write to csv
+    rows = []
     for k in [5, 10, 20, 30, 40, 50]:
         selector = SelectKBest(f_classif, k)
-        X_new = selector.fit_transform(X_train, y_train)
+        X_new32k = selector.fit_transform(X_train, y_train)
         pp = selector.pvalues_
-        print(len(X_new))
-        print(X_new[1])
+        X_new1k = selector.fit_transform(X_1k, y_1k)
+        #Save X_new for 5 best features for step 2
+        if(k == 5):
+            best5_32k = X_new32k
+            best5_1k = X_new1k
+        #Only save pp for 32k
+        rows.append([str(k), str(pp)])
+        
+        
+    #Obtain the best classifier to use
+    if(iBest == 0):
+        classifier = linear = LinearSVC(max_iter=10000)
+        print("Linear chosen")
+    elif(iBest == 1):
+        classifier = rb = SVC(kernel = 'rbf', gamma = 2, max_iter = 10000)
+        print("Radial basis chosen")
+    elif(iBest == 2):
+        classifier = RandomForestClassifier(max_depth=5, n_estimators=10)
+        print("Random forest chosen")
+    elif(iBest == 3):
+        classifier = MLPClassifier(alpha = 0.05)
+        print("MLP chosen")
+    else:
+        classifier = AdaBoostClassifier()
+        print("Ada boost chosen")
+    
+    #Train 5 best features for 1k
+    accList = []
+    
+    print("Running classifier for 1k")
+    classifier.fit(best5_1k, y_1k.ravel())
+    predictions1k = classifier.predict(X_test)
+    cm1k = confusion_matrix(y_test, predictions1k)
+    accList.append(str(accuracy(cm1k)))
+    
+    #Train 5 best features for 32k
+    print("Running classifier for 32k")
+    classifier.fit(best5_32k, y_train.ravel())
+    predictions32k = classifier.predict(X_test)
+    cm1k = confusion_matrix(y_test, predictions32k)
+    accList.append(str(accuracy(cm1k)))
+    
+    rows.append(accList)
+    print(accList)
+    
+    #Write to the csv file
+    with open('a1_3.3.csv', 'w') as csvfile:
+        writer = csv.writer(csvfile)
+        for row in rows:
+            writer.writerow(row)
+        
+        
 
 def class34( filename, i ):
     ''' This function performs experiment 3.4
