@@ -36,7 +36,7 @@ def class31(filename):
     data = np.load(filename)['arr_0']
     X = data[:data.size, :173]
         
-    print(X)
+    print(data.size, X.size, X[0].size)
     return 0
     #return (X_train, X_test, y_train, y_test, iBest)
 
