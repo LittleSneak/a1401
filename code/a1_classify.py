@@ -4,6 +4,8 @@ from sklearn.feature_selection import chi2
 from sklearn.svm import SVC
 from sklearn.svm import LinearSVC
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.neural_network import MLPClassifier
+from sklearn.ensemble import AdaBoostClassifier
 import numpy as np
 import argparse
 import sys
