@@ -33,9 +33,7 @@ def class31(filename):
        i: int, the index of the supposed best classifier
     '''
     data = np.load(filename)
-    X = []
-    for item in data:
-        X.append(item[0:173])
+    X = data[:173, data.size]
         
     print(X)
     return 0
