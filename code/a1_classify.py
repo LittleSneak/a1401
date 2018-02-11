@@ -259,4 +259,5 @@ if __name__ == "__main__":
 
     # TODO : complete each classification experiment, in sequence.
     results31 = class31(args.input)
-    class32(results31[0], results31[1], results31[2], results31[3], results31[4])
+    results32 = class32(results31[0], results31[1], results31[2], results31[3], results31[4])
+    class33(results31[0], results31[1], results31[2], results31[3], results31[4], results32[0], results32[1])
