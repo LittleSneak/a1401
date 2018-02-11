@@ -7,6 +7,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.neural_network import MLPClassifier
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.metrics import confusion_matrix
+import csv
 import numpy as np
 import argparse
 import sys
@@ -114,11 +115,31 @@ def class31(filename):
     mlpCM = confusion_matrix(y_test, predictions4)
     adaboostCM = confusion_matrix(y_test, predictions5)
     
-    print(linearCM)
-    print(recall(linearCM))
-    print(precision(linearCM))
-    
-    
+    #Write to file
+    with open('a1_3.1.csv', 'wb') as csvfile:
+        writer = csv.write(csvfile)
+        
+        cms = [linearCM, rbfCM, forestCM, mlpCM, adaboostCM]
+        
+        #Iterate through CMs and write them
+        for index in range(0, 5):
+            row = [str(index + 1)]
+            row.append(str(accuracy(cms[index])))
+            
+            rec = recall(cms[index])
+            for x in range(0, 4):
+                row.append(str(rec[x]))
+                
+            prec = precision(cms[index])
+            for x in range(0, 4):
+                row.append(str(prec[x]))
+            
+            for x in range(0, 4):
+                for y in range(0, 4):
+                    row.append(str(cms[index][x][y]))
+            writer.writerow(row)
+            
+    return 0
     #return (X_train, X_test, y_train, y_test, iBest)
 
 
