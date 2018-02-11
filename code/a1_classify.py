@@ -130,25 +130,44 @@ def class31(filename):
         cms = [linearCM, rbfCM, forestCM, mlpCM, adaboostCM]
         
         #Iterate through CMs and write them
+        #Scores keeps track of the score for deciding the best classifier later
+        scores = []
         for index in range(0, 5):
-            row = [str(index + 1)]
-            row.append(str(accuracy(cms[index])))
+            score = 0
+            newScore = accuracy(cms[index])
+            score = score + newScore
             
-            rec = recall(cms[index])
+            row = [str(index + 1)]
+            #Accuracy
+            row.append(str(newScore))
+            
+            newScore = recall(cms[index])
+            score = score + newScore
             for x in range(0, 4):
-                row.append(str(rec[x]))
+                row.append(str(newScore))
                 
-            prec = precision(cms[index])
+            newScore = precision(cms[index])
+            score = score + newScore
             for x in range(0, 4):
-                row.append(str(prec[x]))
+                row.append(str(newScore))
             
             for x in range(0, 4):
                 for y in range(0, 4):
                     row.append(str(cms[index][x][y]))
             writer.writerow(row)
+            scores.append(score)
             
-    return 0
-    #return (X_train, X_test, y_train, y_test, iBest)
+    #Find the best classifier
+    maxIndex = 0
+    maxScore = 0
+    for index in range(0, 5):
+        if(scores[index] > score):
+            maxIndex = index
+            maxScore = score
+    print(scores)
+    print(index)
+
+    return (X_train, X_test, y_train, y_test, index)
 
 
 def class32(X_train, X_test, y_train, y_test, iBest):
