@@ -6,6 +6,7 @@ from sklearn.svm import LinearSVC
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.neural_network import MLPClassifier
 from sklearn.ensemble import AdaBoostClassifier
+from sklearn.metrics import confusion_matrix
 import numpy as np
 import argparse
 import sys
