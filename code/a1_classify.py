@@ -34,8 +34,9 @@ def class31(filename):
     '''
     data = np.load(filename)
     X = []
-    for index in range(0, len(data)):
-        X.append(data[index][:173])
+    for item in data:
+        X.append(item[:173])
+        
     print(X)
     return 0
     #return (X_train, X_test, y_train, y_test, iBest)
