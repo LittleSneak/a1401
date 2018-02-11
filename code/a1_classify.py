@@ -8,6 +8,8 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.metrics import confusion_matrix
 from sklearn.feature_selection import f_classif
+from sklearn.feature_selection import KFold
+from scipy import stats
 import csv
 import numpy as np
 import argparse
@@ -279,15 +281,13 @@ def class33(X_train, X_test, y_train, y_test, i, X_1k, y_1k):
         classifier = AdaBoostClassifier()
         print("Ada boost chosen")
     
-    #Train 5 best features for 1k
     accList = []
     
+    #Get only needed columns from X_test
     best5_X_test = X_test[: , best5Features]
-    print(X_test)
-    print(best5_X_test)
     
+    #Train 5 best features for 1k
     print("Running classifier for 1k")
-    
     classifier.fit(best5_1k, y_1k.ravel())
     predictions1k = classifier.predict(best5_X_test)
     cm1k = confusion_matrix(y_test, predictions1k)
@@ -318,7 +318,18 @@ def class34( filename, i ):
        filename : string, the name of the npz file from Task 2
        i: int, the index of the supposed best classifier (from task 3.1)  
         '''
-    print('TODO Section 3.4')
+    #Load numpy from file
+    data = np.load(filename)['arr_0']
+    X = data[:, :173]
+    Y = data[:, 173:]
+    for train_index, test_index in kf.split(X):
+        print("TRAIN:", train_index, "TEST:", test_index)
+        X_train, X_test = X[train_index], X[test_index]
+        y_train, y_test = y[train_index], y[test_index]
+        print(X_train, y_train)
+    
+    kf = KFolds(n_splits = 5, shuffle = True)
+    
     return 0
     
 if __name__ == "__main__":
