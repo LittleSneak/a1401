@@ -322,13 +322,15 @@ def class34( filename, i ):
     data = np.load(filename)['arr_0']
     X = data[:, :173]
     Y = data[:, 173:]
+    
+    #Split data
+    kf = KFolds(n_splits = 5, shuffle = True)
     for train_index, test_index in kf.split(X):
         print("TRAIN:", train_index, "TEST:", test_index)
         X_train, X_test = X[train_index], X[test_index]
         y_train, y_test = y[train_index], y[test_index]
         print(X_train, y_train)
     
-    kf = KFolds(n_splits = 5, shuffle = True)
     
     return 0
     
