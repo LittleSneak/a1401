@@ -191,7 +191,7 @@ def class32(X_train, X_test, y_train, y_test, iBest):
         classifier = AdaBoostClassifier()
     
     #Test each one
-    train_sizes = [1000, 1200, 1400, 1600, 2000]
+    train_sizes = [1000, 5000, 10000, 15000, 20000]
     accList = []
     for size in train_sizes:
         print("Processing size " + str(size))
@@ -203,7 +203,6 @@ def class32(X_train, X_test, y_train, y_test, iBest):
         #Perform fitting and accuracy calculations
         classifier.fit(X_traint, y_traint.ravel())
         accList.append(accuracy(confusion_matrix(y_testt, classifier.predict(X_testt))))
-    print(accList)
     
     #Write to a csv file
     with open('a1_3.2.csv', 'w') as csvfile:
