@@ -116,7 +116,7 @@ def class31(filename):
     adaboostCM = confusion_matrix(y_test, predictions5)
     
     #Write to file
-    with open('a1_3.1.csv', 'wb') as csvfile:
+    with open('a1_3.1.csv', 'w') as csvfile:
         writer = csv.writer(csvfile)
         
         cms = [linearCM, rbfCM, forestCM, mlpCM, adaboostCM]
