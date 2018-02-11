@@ -319,6 +319,7 @@ def class34( filename, i ):
        i: int, the index of the supposed best classifier (from task 3.1)  
         '''
     #Load numpy from file
+    print("Starting 3.4")
     data = np.load(filename)['arr_0']
     X = data[:, :173]
     Y = data[:, 173:]
@@ -332,7 +333,10 @@ def class34( filename, i ):
     rows = []
     #Split data and iterate through all splits
     kf = KFold(n_splits = 5, shuffle = True)
+    index = 1
     for train_index, test_index in kf.split(X):
+        print("Processing split " + str(index))
+        index = index + 1
         #Extract specific rows to get training and testing data
         X_train = X[train_index, :]
         X_test = X[test_index, :]
@@ -423,7 +427,7 @@ def class34( filename, i ):
         writer = csv.writer(csvfile)
         for row in rows:
             writer.writerow(row)
-        write.writerow(p_vals)
+        writer.writerow(p_vals)
     
     return 0
     
