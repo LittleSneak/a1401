@@ -14,7 +14,9 @@ import os
 
 def accuracy( C ):
     ''' Compute accuracy given Numpy array confusion matrix C. Returns a floating point value '''
+    #Sum of diagonal in matrix
     rightSum = 0
+    #Sum of all values in matrix
     totalSum = 0
     for x in range(0, len(C)):
         for y in range(0, len(C[0])):
@@ -25,13 +27,26 @@ def accuracy( C ):
     return rightSum / totalSum
 
 def recall( C ):
+    #row column
     ''' Compute recall given Numpy array confusion matrix C. Returns a list of floating point values '''
-    print ('TODO')
+    retList = []
+    #A class belongs to a row
+    #Correctly classified parts are in the diagonal
+    for x in range(0, len(C)):
+        rowSum = 0
+        correct = 0        
+        for y in range(0, len(C[0])):
+            if(x == y):
+                correct = correct + C[x][y]
+            rowSum = rowSum + C[x][y]
+        retList.append(correct / rowSum)
+    return retList
+            
 
 def precision( C ):
     ''' Compute precision given Numpy array confusion matrix C. Returns a list of floating point values '''
-    print ('TODO')
-    
+    return 0
+             
 
 def class31(filename):
     ''' This function performs experiment 3.1
@@ -90,9 +105,8 @@ def class31(filename):
     mlpCM = confusion_matrix(y_test, predictions4)
     adaboostCM = confusion_matrix(y_test, predictions5)
     
-    print(len(X), len(X_test), len(X_train))
-    print(accuracy(linearCM))
-    print(linearCM)
+    print(recall(linearCM))
+    
     
     #return (X_train, X_test, y_train, y_test, iBest)
 
