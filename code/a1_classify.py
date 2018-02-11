@@ -105,6 +105,7 @@ def class31(filename):
     mlpCM = confusion_matrix(y_test, predictions4)
     adaboostCM = confusion_matrix(y_test, predictions5)
     
+    print(linearCM)
     print(recall(linearCM))
     
     
