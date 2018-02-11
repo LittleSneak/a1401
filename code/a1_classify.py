@@ -2,6 +2,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.feature_selection import SelectKBest
 from sklearn.feature_selection import chi2
 from sklearn.svm import SVC
+from sklearn.svm import LinearSVC
 from sklearn.ensemble import RandomForestClassifier
 import numpy as np
 import argparse
@@ -41,16 +42,19 @@ def class31(filename):
     X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.8)
     
     #Linear SVC
-    linear = SVC(kernel = 'linear')
+    print("Processing Linear")
+    linear = LinearSVC()
     linear.fit(X_train, y_train.ravel())
     predictions1 = linear.predict(X_test)
     
     #Radial basis function, gamma = 2
+    print("Processing radial basis")
     rb = SVC(kernel = 'rbf', gamma = 2)
     rb.fit(X_train, y_train.ravel())
     predictions2 = rb.predict(X_test)
     
     #Random Forest Classifier. max depth = 5 and 10 estimators
+    print("Processing forest")
     forest = RandomForestClassifier(max_depth=5, n_estimators=10)
     forest.fit(X_train, y_train.ravel())
     predictions3 = forest.predict(X_test)
