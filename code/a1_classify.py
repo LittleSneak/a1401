@@ -86,7 +86,7 @@ def class31(filename):
     X = data[:, :173]
     Y = data[:, 173:]
     X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2)
-    print(len(y_train))
+    print(len(y_train[0]))
     
     #Run all 5 classifiers
     #Linear SVC. Using LinearSVC instead of SVC since it is much faster
@@ -250,7 +250,10 @@ def class33(X_train, X_test, y_train, y_test, i, X_1k, y_1k):
             best5_32k = X_new32k
             best5_1k = X_new1k
         #Only save pp for 32k
-        rows.append([str(k), str(pp)])
+        row = [str(k)]
+        for pval in pp:
+            row.append(str(pval))
+        rows.append(row)
         
         
     #Obtain the best classifier to use
