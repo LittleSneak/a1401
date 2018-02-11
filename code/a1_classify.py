@@ -41,9 +41,9 @@ def class31(filename):
     Y = data[:, 173:]
     X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.8)
     
-    #Linear SVC
+    #Linear SVC. Using LinearSVC instead of SVC since it is much faster
     print("Processing Linear")
-    linear = SVC(kernel = 'linear', cache_size=500)
+    linear = LinearSVC()
     linear.fit(X_train, y_train.ravel())
     predictions1 = linear.predict(X_test)
     
@@ -59,9 +59,23 @@ def class31(filename):
     forest.fit(X_train, y_train.ravel())
     predictions3 = forest.predict(X_test)
     
+    #MLPClassifier with alpha = 0.05
+    print("Processing MLP")
+    mlp = MLPClassifier(alpha = 0.05)
+    mlp.fit(X_train, y_train.ravel())
+    predictions4 = mlp.predict(X_test)
+    
+    #AdaBoostClassifier with default
+    print("Processing AdaBoost")
+    adaboost = AdaBoostClassifier()
+    adaboost.fit(X_train, y_train.ravel())
+    predictions5 = adaboost.predict(X_test)
+    
     print(predictions1)
     print(predictions2)
     print(predictions3)
+    print(predictions4)
+    print(predictions5)
     
     #return (X_train, X_test, y_train, y_test, iBest)
 
