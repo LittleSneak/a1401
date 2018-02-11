@@ -323,6 +323,13 @@ def class34( filename, i ):
     X = data[:, :173]
     Y = data[:, 173:]
     
+    accLinear = []
+    accRbf = []
+    accForest = []
+    accMlp = []
+    accAda = []
+    #Stores rows to write to file
+    rows = []
     #Split data and iterate through all splits
     kf = KFold(n_splits = 5, shuffle = True)
     for train_index, test_index in kf.split(X):
@@ -372,15 +379,51 @@ def class34( filename, i ):
         mlpCM = confusion_matrix(y_test, predictions4)
         adaboostCM = confusion_matrix(y_test, predictions5)
         
-        #Get accuracies
-        accList = []
-        accList.append(accuracy(linearCM))
-        accList.append(accuracy(rbfCM))
-        accList.append(accuracy(forestCM))
-        accList.append(accuracy(mlpCM))
-        accList.append(accuracy(adaboostCM))
-        print(accList)
+        #Get accuracies and store it into accs to write
+        #Also store into a list to compare with ttest later
+        accs = []
+        acc = accuracy(linearCM)
+        accs.append(str(acc))
+        accLinear.append(acc)
+        
+        acc = accuracy(rbfCM)
+        accs.append(str(acc))
+        accRbf.append(acc)
+        
+        acc = accuracy(forestCM)
+        accs.append(str(acc))
+        accForest.append(acc)
+        
+        acc = accuracy(mlpCM)
+        accs.append(str(acc))
+        accMlp.append(acc)
+        
+        acc = accuracy(adaboostCM)
+        accs.append(str(acc))
+        accAda.append(acc)
+        
+        rows.append(accs)
+        
+    #Get best classifier
+    accList = []
+    accList.append(accLinear)
+    accList.append(accRbf)
+    accList.append(accForest)
+    accList.append(accMlp)
+    accList.append(accAda)
+    best = accList.pop(i)
     
+    #Obtain p values
+    p_vals = []
+    for acc in accList:
+        p_vals.append(str(stats.ttest_rel(best, acc)))
+        
+    #Write to the csv file
+    with open('a1_3.4.csv', 'w') as csvfile:
+        writer = csv.writer(csvfile)
+        for row in rows:
+            writer.writerow(row)
+        write.writerow(p_vals)
     
     return 0
     
