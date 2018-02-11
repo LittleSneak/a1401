@@ -199,7 +199,7 @@ def class32(X_train, X_test, y_train, y_test, iBest):
         print("Ada boost chosen")
     
     #Test each one
-    train_sizes = [1000, 5000, 10000, 15000, 20000]
+    train_sizes = [1000, 5000, 5000, 5000, 5000]
     accList = []
     for size in train_sizes:
         print("Processing size " + str(size))
