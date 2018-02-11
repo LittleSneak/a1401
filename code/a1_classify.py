@@ -41,7 +41,7 @@ def class31(filename):
     
     #Linear SVC
     clf = SVC()
-    clf.fit(X_train, y_train)
+    clf.fit(X_train, y_train.ravel())
     SVC(kernel = 'linear')
     print(clf.predict(X))
     
