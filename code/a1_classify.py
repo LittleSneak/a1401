@@ -203,7 +203,7 @@ def class32(X_train, X_test, y_train, y_test, iBest):
     accList = []
     for size in train_sizes:
         print("Processing size " + str(size))
-        X_traint, X_testt, y_traint, y_testt = train_test_split(X_train, y_train, test_size=size)
+        X_traint, X_testt, y_traint, y_testt = train_test_split(X_train, y_train, train_size=size)
         #Keep the 1k train sizes for return
         if(size == 1000):
             X_1k = X_traint
@@ -313,6 +313,7 @@ def class34( filename, i ):
        i: int, the index of the supposed best classifier (from task 3.1)  
         '''
     print('TODO Section 3.4')
+    return 0
     
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Process each .')
@@ -323,3 +324,4 @@ if __name__ == "__main__":
     results31 = class31(args.input)
     results32 = class32(results31[0], results31[1], results31[2], results31[3], results31[4])
     class33(results31[0], results31[1], results31[2], results31[3], results31[4], results32[0], results32[1])
+    class34(args.input, results31[4])
