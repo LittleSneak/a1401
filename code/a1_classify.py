@@ -50,7 +50,7 @@ def class31(filename):
     data = np.load(filename)['arr_0']
     X = data[:, :173]
     Y = data[:, 173:]
-    X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.8)
+    X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2)
     
     #Run all 5 classifiers
     #Linear SVC. Using LinearSVC instead of SVC since it is much faster
