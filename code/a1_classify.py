@@ -44,6 +44,7 @@ def class31(filename):
     clf.fit(X_train, y_train.ravel())
     SVC(kernel = 'linear')
     print(clf.predict(X))
+    print(clf.predict(X_test))
     
     #return (X_train, X_test, y_train, y_test, iBest)
 
