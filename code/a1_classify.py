@@ -323,17 +323,63 @@ def class34( filename, i ):
     X = data[:, :173]
     Y = data[:, 173:]
     
-    #Split data
+    #Split data and iterate through all splits
     kf = KFold(n_splits = 5, shuffle = True)
     for train_index, test_index in kf.split(X):
-        print("TRAIN:", train_index, "TEST:", test_index)
         #Extract specific rows to get training and testing data
         X_train = X[train_index, :]
         X_test = X[test_index, :]
         y_train = Y[train_index, :]
         y_test = Y[test_index, :]        
-        print(X_train, y_train)
-        print(X, Y)
+        
+        #Perform tests...
+        
+        #Run all 5 classifiers
+        #Linear SVC. Using LinearSVC instead of SVC since it is much faster
+        print("Processing Linear")
+        linear = LinearSVC(max_iter=10)
+        linear.fit(X_train, y_train.ravel())
+        predictions1 = linear.predict(X_test)
+        
+        #Radial basis function, gamma = 2
+        print("Processing radial basis")
+        rb = SVC(kernel = 'rbf', gamma = 2, max_iter=10)
+        rb.fit(X_train, y_train.ravel())
+        predictions2 = rb.predict(X_test)
+        
+        #Random Forest Classifier. max depth = 5 and 10 estimators
+        print("Processing forest")
+        forest = RandomForestClassifier(max_depth=5, n_estimators=10)
+        forest.fit(X_train, y_train.ravel())
+        predictions3 = forest.predict(X_test)
+        
+        #MLPClassifier with alpha = 0.05
+        print("Processing MLP")
+        mlp = MLPClassifier(alpha = 0.05)
+        mlp.fit(X_train, y_train.ravel())
+        predictions4 = mlp.predict(X_test)
+        
+        #AdaBoostClassifier with default
+        print("Processing AdaBoost")
+        adaboost = AdaBoostClassifier()
+        adaboost.fit(X_train, y_train.ravel())
+        predictions5 = adaboost.predict(X_test)
+        
+        #Obtain confusion matrices
+        linearCM = confusion_matrix(y_test, predictions1)
+        rbfCM = confusion_matrix(y_test, predictions2)
+        forestCM = confusion_matrix(y_test, predictions3)
+        mlpCM = confusion_matrix(y_test, predictions4)
+        adaboostCM = confusion_matrix(y_test, predictions5)
+        
+        #Get accuracies
+        accList = []
+        accList.append(accuracy(linearCM))
+        accList.append(accuracy(rbfCM))
+        accList.append(accuracy(forestCM))
+        accList.append(accuracy(mlpCM))
+        accList.append(accuracy(adaboostCM))
+        print(accList)
     
     
     return 0
