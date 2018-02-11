@@ -332,7 +332,7 @@ def class34( filename, i ):
     #Stores rows to write to file
     rows = []
     #Split data and iterate through all splits
-    kf = KFold(n_splits = 5, shuffle = True)
+    kf = KFold(n_splits = 2, shuffle = True)
     index = 1
     for train_index, test_index in kf.split(X):
         print("Processing split " + str(index))
@@ -420,7 +420,7 @@ def class34( filename, i ):
     #Obtain p values
     p_vals = []
     for acc in accList:
-        p_vals.append(str(stats.ttest_rel(best, acc)))
+        p_vals.append(str(stats.ttest_rel(best, acc).pvalue))
         
     #Write to the csv file
     with open('a1_3.4.csv', 'w') as csvfile:
