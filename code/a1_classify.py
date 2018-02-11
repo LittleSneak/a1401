@@ -240,8 +240,8 @@ def class33(X_train, X_test, y_train, y_test, i, X_1k, y_1k):
         selector = SelectKBest(f_classif, k)
         X_new = selector.fit_transform(X_train, y_train)
         pp = selector.pvalues_
-        print(X_new)
-        print(X_new[0])
+        print(len(X_new))
+        print(X_new[1])
 
 def class34( filename, i ):
     ''' This function performs experiment 3.4
