@@ -7,6 +7,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.neural_network import MLPClassifier
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.metrics import confusion_matrix
+from sklearn.feature_selection import f_classif
 import csv
 import numpy as np
 import argparse
@@ -180,9 +181,9 @@ def class32(X_train, X_test, y_train, y_test, iBest):
    '''
     #Obtain the best classifier to use
     if(iBest == 0):
-        classifier = linear = LinearSVC()
+        classifier = linear = LinearSVC(max_iter=1000)
     elif(iBest == 1):
-        classifier = rb = SVC(kernel = 'rbf', gamma = 2)
+        classifier = rb = SVC(kernel = 'rbf', gamma = 2, max_iter = 10000)
     elif(iBest == 2):
         classifier = RandomForestClassifier(max_depth=5, n_estimators=10)
     elif(iBest == 3):
@@ -226,7 +227,12 @@ def class33(X_train, X_test, y_train, y_test, i, X_1k, y_1k):
        X_1k: numPy array, just 1K rows of X_train (from task 3.2)
        y_1k: numPy array, just 1K rows of y_train (from task 3.2)
     '''
-    print('TODO Section 3.3')
+    #Go through each k value
+    for k in [5, 10, 20, 30, 40, 50]:
+        selector = SelectKBest(f_classif, k)
+        X_new = selector.fit_transform(X_train, y_train)
+        pp = selector.pvalues_
+        print(X_new)
 
 def class34( filename, i ):
     ''' This function performs experiment 3.4
