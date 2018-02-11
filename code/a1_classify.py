@@ -282,10 +282,11 @@ def class33(X_train, X_test, y_train, y_test, i, X_1k, y_1k):
     #Train 5 best features for 1k
     accList = []
     
-    """print("Running classifier for 1k")
+    print("Running classifier for 1k")
     
     print(best5_1k)
-    print(len(best5_1k))
+    print(best5_1k.shape)
+    print(y_1k.shape)
     
     classifier.fit(best5_1k, y_1k.ravel())
     predictions1k = classifier.predict(X_test)
@@ -301,7 +302,7 @@ def class33(X_train, X_test, y_train, y_test, i, X_1k, y_1k):
     
     rows.append(accList)
     print(accList)
-    """
+    
     #Write to the csv file
     with open('a1_3.3.csv', 'w') as csvfile:
         writer = csv.writer(csvfile)
