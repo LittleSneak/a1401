@@ -43,7 +43,7 @@ def class31(filename):
     
     #Linear SVC
     print("Processing Linear")
-    linear = LinearSVC()
+    linear = SVC(kernel = 'linear', cache_size=400, max_iter=20)
     linear.fit(X_train, y_train.ravel())
     predictions1 = linear.predict(X_test)
     
