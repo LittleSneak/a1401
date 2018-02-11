@@ -117,7 +117,7 @@ def class31(filename):
     
     #Write to file
     with open('a1_3.1.csv', 'wb') as csvfile:
-        writer = csv.write(csvfile)
+        writer = csv.writer(csvfile)
         
         cms = [linearCM, rbfCM, forestCM, mlpCM, adaboostCM]
         
