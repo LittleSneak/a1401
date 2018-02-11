@@ -73,11 +73,13 @@ def class31(filename):
     adaboost.fit(X_train, y_train.ravel())
     predictions5 = adaboost.predict(X_test)
     
-    print(predictions1)
-    print(predictions2)
-    print(predictions3)
-    print(predictions4)
-    print(predictions5)
+    linearCM = confusion_matrix(y_test, predictions1)
+    rbfCM = confusion_matrix(y_test, predictions2)
+    forestCM = confusion_matrix(y_test, predictions3)
+    mlpCM = confusion_matrix(y_test, predictions4)
+    adaboostCM = confusion_matrix(y_test, predictions5)
+    
+    print(linearCM)
     
     #return (X_train, X_test, y_train, y_test, iBest)
 
