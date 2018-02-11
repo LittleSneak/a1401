@@ -24,7 +24,10 @@ def accuracy( C ):
             if(x == y):
                 rightSum = rightSum + C[x][y]
             totalSum = totalSum + C[x][y]
-    return rightSum / totalSum
+    if(totalSum != 0):
+        return rightSum / totalSum
+    else:
+        return 0
 
 def recall( C ):
     #row column
