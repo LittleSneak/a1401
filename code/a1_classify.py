@@ -253,6 +253,7 @@ def class33(X_train, X_test, y_train, y_test, i, X_1k, y_1k):
             best5_1k = X_new1k
         #Only save pp for 32k
         row = [str(k)]
+        print(len(pp))
         for pval in pp:
             row.append(str(pval))
         rows.append(row)
