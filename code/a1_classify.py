@@ -86,7 +86,6 @@ def class31(filename):
     X = data[:, :173]
     Y = data[:, 173:]
     X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2)
-    print(len(y_train[0]))
     
     #Run all 5 classifiers
     #Linear SVC. Using LinearSVC instead of SVC since it is much faster
@@ -242,9 +241,9 @@ def class33(X_train, X_test, y_train, y_test, i, X_1k, y_1k):
     rows = []
     for k in [5, 10, 20, 30, 40, 50]:
         selector = SelectKBest(f_classif, k)
-        X_new32k = selector.fit_transform(X_train, y_train)
+        X_new32k = selector.fit_transform(X_train, y_train.ravel())
         pp = selector.pvalues_
-        X_new1k = selector.fit_transform(X_1k, y_1k)
+        X_new1k = selector.fit_transform(X_1k, y_1k.ravel())
         #Save X_new for 5 best features for step 2
         if(k == 5):
             best5_32k = X_new32k
@@ -277,6 +276,7 @@ def class33(X_train, X_test, y_train, y_test, i, X_1k, y_1k):
     accList = []
     
     print("Running classifier for 1k")
+    print(y_1k)
     classifier.fit(best5_1k, y_1k.ravel())
     predictions1k = classifier.predict(X_test)
     cm1k = confusion_matrix(y_test, predictions1k)
