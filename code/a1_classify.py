@@ -324,7 +324,7 @@ def class34( filename, i ):
     Y = data[:, 173:]
     
     #Split data
-    kf = KFolds(n_splits = 5, shuffle = True)
+    kf = KFold(n_splits = 5, shuffle = True)
     for train_index, test_index in kf.split(X):
         print("TRAIN:", train_index, "TEST:", test_index)
         X_train, X_test = X[train_index], X[test_index]
