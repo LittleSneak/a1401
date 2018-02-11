@@ -32,8 +32,8 @@ def class31(filename):
        y_test: NumPy array, with the selected testing classes
        i: int, the index of the supposed best classifier
     '''
-    data = np.load(filename)
-    print(data['arr_0'])
+    #Load the npy from the file
+    data = np.load(filename)['arr_0']
     X = data[:173, data.size]
         
     print(X)
