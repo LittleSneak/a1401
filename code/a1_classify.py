@@ -242,6 +242,7 @@ def class33(X_train, X_test, y_train, y_test, i, X_1k, y_1k):
     rows = []
     for k in [5, 10, 20, 30, 40, 50]:
         selector = SelectKBest(f_classif, k)
+        print(selector.get_support(indices = True))
         X_new32k = selector.fit_transform(X_train, y_train.ravel())
         pp = selector.pvalues_
         
@@ -253,7 +254,6 @@ def class33(X_train, X_test, y_train, y_test, i, X_1k, y_1k):
             best5_1k = X_new1k
         #Only save pp for 32k
         row = [str(k)]
-        print(len(pp))
         for pval in pp:
             row.append(str(pval))
         rows.append(row)
