@@ -282,21 +282,21 @@ def class33(X_train, X_test, y_train, y_test, i, X_1k, y_1k):
     #Train 5 best features for 1k
     accList = []
     
+    best5_X_test = X_test[: , best5Features]
+    print(X_test)
+    print(best5_X_test)
+    
     print("Running classifier for 1k")
     
-    print(best5_1k)
-    print(best5_1k.shape)
-    print(y_1k.shape)
-    
     classifier.fit(best5_1k, y_1k.ravel())
-    predictions1k = classifier.predict(X_test)
+    predictions1k = classifier.predict(best5_X_test)
     cm1k = confusion_matrix(y_test, predictions1k)
     accList.append(str(accuracy(cm1k)))
     
     #Train 5 best features for 32k
     print("Running classifier for 32k")
     classifier.fit(best5_32k, y_train.ravel())
-    predictions32k = classifier.predict(X_test)
+    predictions32k = classifier.predict(best5_X_test)
     cm1k = confusion_matrix(y_test, predictions32k)
     accList.append(str(accuracy(cm1k)))
     
