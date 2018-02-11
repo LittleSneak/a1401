@@ -253,16 +253,16 @@ def class33(X_train, X_test, y_train, y_test, i, X_1k, y_1k):
         
         
     #Obtain the best classifier to use
-    if(iBest == 0):
+    if(i == 0):
         classifier = linear = LinearSVC(max_iter=10000)
         print("Linear chosen")
-    elif(iBest == 1):
+    elif(i == 1):
         classifier = rb = SVC(kernel = 'rbf', gamma = 2, max_iter = 10000)
         print("Radial basis chosen")
-    elif(iBest == 2):
+    elif(i == 2):
         classifier = RandomForestClassifier(max_depth=5, n_estimators=10)
         print("Random forest chosen")
-    elif(iBest == 3):
+    elif(i == 3):
         classifier = MLPClassifier(alpha = 0.05)
         print("MLP chosen")
     else:
