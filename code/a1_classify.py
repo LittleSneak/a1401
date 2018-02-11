@@ -197,7 +197,7 @@ def class32(X_train, X_test, y_train, y_test, iBest):
         X_traint, X_testt, y_traint, y_testt = train_test_split(X_train, y_train, test_size=size)
         #Keep the 1k train sizes for return
         if(size == 1000):
-            X_1k = x_traint
+            X_1k = X_traint
             y_1k = y_traint
         #Perform fitting and accuracy calculations
         classifier.fit(X_traint, y_traint.ravel())
