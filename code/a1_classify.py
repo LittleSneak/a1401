@@ -199,7 +199,7 @@ def class32(X_train, X_test, y_train, y_test, iBest):
         print("Ada boost chosen")
     
     #Test each one
-    train_sizes = [1000, 5000, 5000, 5000, 5000]
+    train_sizes = [1000, 1000, 1000, 1000, 1000]
     accList = []
     for size in train_sizes:
         print("Processing size " + str(size))
@@ -242,8 +242,8 @@ def class33(X_train, X_test, y_train, y_test, i, X_1k, y_1k):
     rows = []
     for k in [5, 10, 20, 30, 40, 50]:
         selector = SelectKBest(f_classif, k)
-        print(selector.get_support(indices = True))
         X_new32k = selector.fit_transform(X_train, y_train.ravel())
+        print(selector.get_support(indices = True))
         pp = selector.pvalues_
         
         selector = SelectKBest(f_classif, k)
