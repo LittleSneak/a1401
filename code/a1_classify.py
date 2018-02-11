@@ -40,11 +40,16 @@ def class31(filename):
     X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.8)
     
     #Linear SVC
-    clf = SVC()
-    clf.fit(X_train, y_train.ravel())
+    linear = SVC()
+    linear.fit(X_train, y_train.ravel())
     SVC(kernel = 'linear')
-    print(clf.predict(X))
-    print(clf.predict(X_test))
+    predictions1 = linear.predict(X_test)
+    
+    #Radial basis function, gamma = 2
+    rb = SVC()
+    rb.fit(X_train, y_train.ravel())
+    SVC(kernel = 'rbf', gamma = 2)
+    predictions2 = rb.predict(X_test)
     
     #return (X_train, X_test, y_train, y_test, iBest)
 
