@@ -35,7 +35,7 @@ def class31(filename):
     data = np.load(filename)
     X = []
     for item in data:
-        X.append(item[:173])
+        X.append(item[0:173])
         
     print(X)
     return 0
