@@ -24,7 +24,6 @@ def accuracy( C ):
             if(x == y):
                 rightSum = rightSum + C[x][y]
             totalSum = totalSum + C[x][y]
-    print(rightSum, totalSum)
     return rightSum / totalSum
 
 def recall( C ):
@@ -55,6 +54,7 @@ def precision( C ):
                 correct = correct + C[x][y]
             columnSum = columnSum + C[x][y]
         retList.append(correct / columnSum)
+        print(columnSum)
     return retList
              
 
