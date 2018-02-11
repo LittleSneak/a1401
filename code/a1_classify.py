@@ -45,7 +45,16 @@ def recall( C ):
 
 def precision( C ):
     ''' Compute precision given Numpy array confusion matrix C. Returns a list of floating point values '''
-    return 0
+    retList = []
+    for y in range(0, len(C[0])):
+        columnSum = 0
+        correct = 0        
+        for x in range(0, len(C)):
+            if(x == y):
+                correct = correct + C[x][y]
+            columnSum = columnSum + C[x][y]
+        retList.append(correct / columnSum)
+    return retList
              
 
 def class31(filename):
@@ -107,6 +116,7 @@ def class31(filename):
     
     print(linearCM)
     print(recall(linearCM))
+    print(precision(linearCM))
     
     
     #return (X_train, X_test, y_train, y_test, iBest)
