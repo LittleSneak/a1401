@@ -89,13 +89,13 @@ def class31(filename):
     #Run all 5 classifiers
     #Linear SVC. Using LinearSVC instead of SVC since it is much faster
     print("Processing Linear")
-    linear = LinearSVC()
+    linear = LinearSVC(max_iter=1000)
     linear.fit(X_train, y_train.ravel())
     predictions1 = linear.predict(X_test)
     
     #Radial basis function, gamma = 2
     print("Processing radial basis")
-    rb = SVC(kernel = 'rbf', gamma = 2)
+    rb = SVC(kernel = 'rbf', gamma = 2, max_iter=1000)
     rb.fit(X_train, y_train.ravel())
     predictions2 = rb.predict(X_test)
     
