@@ -1,6 +1,7 @@
 from sklearn.model_selection import train_test_split
 from sklearn.feature_selection import SelectKBest
 from sklearn.feature_selection import chi2
+from sklearn.svm import SVC
 import numpy as np
 import argparse
 import sys
@@ -32,14 +33,18 @@ def class31(filename):
        y_test: NumPy array, with the selected testing classes
        i: int, the index of the supposed best classifier
     '''
-    #Load the npy from the file
+    #Load the npy from the file and put it through training test split
     data = np.load(filename)['arr_0']
     X = data[:, :173]
     Y = data[:, 173:]
-    X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.33, random_state=42)
-    print(X_train)
+    X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.8)
     
-    return 0
+    #Linear SVC
+    clf = SVC()
+    clf.fit(X_train, y_train)
+    SVC(kernel = 'linear')
+    print(clf.predict(X))
+    
     #return (X_train, X_test, y_train, y_test, iBest)
 
 
