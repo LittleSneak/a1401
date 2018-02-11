@@ -8,7 +8,7 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.metrics import confusion_matrix
 from sklearn.feature_selection import f_classif
-from sklearn.feature_selection import KFold
+from sklearn.model_selection import KFold
 from scipy import stats
 import csv
 import numpy as np
@@ -338,7 +338,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # TODO : complete each classification experiment, in sequence.
-    results31 = class31(args.input)
-    results32 = class32(results31[0], results31[1], results31[2], results31[3], results31[4])
-    class33(results31[0], results31[1], results31[2], results31[3], results31[4], results32[0], results32[1])
-    class34(args.input, results31[4])
+    #results31 = class31(args.input)
+    #results32 = class32(results31[0], results31[1], results31[2], results31[3], results31[4])
+    #class33(results31[0], results31[1], results31[2], results31[3], results31[4], results32[0], results32[1])
+    #class34(args.input, results31[4]
+    class34(args.input, 4)
