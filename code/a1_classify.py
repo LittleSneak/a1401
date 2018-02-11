@@ -85,7 +85,7 @@ def class31(filename):
     data = np.load(filename)['arr_0']
     X = data[:, :173]
     Y = data[:, 173:]
-    X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2)
+    X_train, X_test, y_train, y_test = train_test_split(X, Y, train_size = 0.8, test_size=0.2)
     
     #Run all 5 classifiers
     #Linear SVC. Using LinearSVC instead of SVC since it is much faster
@@ -203,7 +203,7 @@ def class32(X_train, X_test, y_train, y_test, iBest):
     accList = []
     for size in train_sizes:
         print("Processing size " + str(size))
-        test_sz =  len(X_train) - train_size
+        test_sz =  len(X_train) - size
         print(test_sz)
         X_traint, X_testt, y_traint, y_testt = train_test_split(X_train, y_train, train_size=size, test_size = test_sz)
         #Keep the 1k train sizes for return
