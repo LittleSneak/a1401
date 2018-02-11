@@ -317,7 +317,6 @@ def main( args ):
             idx = idR[line['id']]
             for index2 in range(0, 144):
                 feats[index][29 + index2] = dataR[idx][index2]
-    print(feats)
     np.savez_compressed( args.output, feats)
 
     
