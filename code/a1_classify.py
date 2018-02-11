@@ -142,14 +142,14 @@ def class31(filename):
             row.append(str(newScore))
             
             newScore = recall(cms[index])
-            score = score + newScore
             for x in range(0, 4):
-                row.append(str(newScore))
+                score = score + newScore[x]
+                row.append(str(newScore[x]))
                 
             newScore = precision(cms[index])
-            score = score + newScore
             for x in range(0, 4):
-                row.append(str(newScore))
+                score = score + newScore[x]
+                row.append(str(newScore[x]))
             
             for x in range(0, 4):
                 for y in range(0, 4):
