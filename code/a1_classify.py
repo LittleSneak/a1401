@@ -161,9 +161,9 @@ def class31(filename):
     maxIndex = 0
     maxScore = 0
     for index in range(0, 5):
-        if(scores[index] > score):
+        if(scores[index] > maxScore):
             maxIndex = index
-            maxScore = score
+            maxScore = scores[index]
     print(scores)
     print(index)
 
