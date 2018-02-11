@@ -39,7 +39,10 @@ def recall( C ):
             if(x == y):
                 correct = correct + C[x][y]
             rowSum = rowSum + C[x][y]
-        retList.append(correct / rowSum)
+        if(rowSum != 0):
+            retList.append(correct / rowSum)
+        else:
+            retList.append(0)
     return retList
             
 
@@ -53,8 +56,10 @@ def precision( C ):
             if(x == y):
                 correct = correct + C[x][y]
             columnSum = columnSum + C[x][y]
-        retList.append(correct / columnSum)
-        print(columnSum)
+        if(columnSum != 0):
+            retList.append(correct / columnSum)
+        else:
+            retList.append(0)
     return retList
              
 
