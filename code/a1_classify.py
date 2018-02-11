@@ -194,6 +194,7 @@ def class32(X_train, X_test, y_train, y_test, iBest):
     train_sizes = [1000, 1200, 1400, 1600, 2000]
     accList = []
     for size in train_sizes:
+        print("Processing size " + str(size))
         X_traint, X_testt, y_traint, y_testt = train_test_split(X_train, y_train, test_size=size)
         #Keep the 1k train sizes for return
         if(size == 1000):
