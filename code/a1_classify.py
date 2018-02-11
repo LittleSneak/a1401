@@ -81,6 +81,7 @@ def class31(filename):
        i: int, the index of the supposed best classifier
     '''
     #Load the npy from the file and put it through training test split
+    print("Beginning 3.1")
     data = np.load(filename)['arr_0']
     X = data[:, :173]
     Y = data[:, 173:]
@@ -89,13 +90,13 @@ def class31(filename):
     #Run all 5 classifiers
     #Linear SVC. Using LinearSVC instead of SVC since it is much faster
     print("Processing Linear")
-    linear = LinearSVC(max_iter=1000)
+    linear = LinearSVC(max_iter=10)
     linear.fit(X_train, y_train.ravel())
     predictions1 = linear.predict(X_test)
     
     #Radial basis function, gamma = 2
     print("Processing radial basis")
-    rb = SVC(kernel = 'rbf', gamma = 2, max_iter=1000)
+    rb = SVC(kernel = 'rbf', gamma = 2, max_iter=10)
     rb.fit(X_train, y_train.ravel())
     predictions2 = rb.predict(X_test)
     
@@ -180,16 +181,22 @@ def class32(X_train, X_test, y_train, y_test, iBest):
        y_1k: numPy array, just 1K rows of y_train
    '''
     #Obtain the best classifier to use
+    print("Beginning 3.2")
     if(iBest == 0):
-        classifier = linear = LinearSVC(max_iter=1000)
+        classifier = linear = LinearSVC(max_iter=10)
+        print("Linear chosen")
     elif(iBest == 1):
-        classifier = rb = SVC(kernel = 'rbf', gamma = 2, max_iter = 10000)
+        classifier = rb = SVC(kernel = 'rbf', gamma = 2, max_iter = 10)
+        print("Radial basis chosen")
     elif(iBest == 2):
         classifier = RandomForestClassifier(max_depth=5, n_estimators=10)
+        print("Random forest chosen")
     elif(iBest == 3):
         classifier = MLPClassifier(alpha = 0.05)
+        print("MLP chosen")
     else:
         classifier = AdaBoostClassifier()
+        print("Ada boost chosen")
     
     #Test each one
     train_sizes = [1000, 5000, 10000, 15000, 20000]
@@ -228,11 +235,13 @@ def class33(X_train, X_test, y_train, y_test, i, X_1k, y_1k):
        y_1k: numPy array, just 1K rows of y_train (from task 3.2)
     '''
     #Go through each k value
+    print("Beginning 3.3")
     for k in [5, 10, 20, 30, 40, 50]:
         selector = SelectKBest(f_classif, k)
         X_new = selector.fit_transform(X_train, y_train)
         pp = selector.pvalues_
         print(X_new)
+        print(X_new[0])
 
 def class34( filename, i ):
     ''' This function performs experiment 3.4
