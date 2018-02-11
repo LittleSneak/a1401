@@ -6,13 +6,12 @@ import re
 import string
 import spacy
 
-#indir = '/u/cs401/A1/data/';
-indir = 'C:/Users/Admin/Downloads/401a1/data'
+indir = '/u/cs401/A1/data/';
 
 nlp = spacy.load('en', disable=['parser', 'ner'])
 #Contains the abbreviations from the abbreviations file
 abbreviations = []
-with open('abbrev.english') as fp:
+with open('/u/cs401/Wordlists/abbrev.english') as fp:
     for line in fp:
         #Remove the \n char at the end
         line = line[:-1]
@@ -20,7 +19,7 @@ with open('abbrev.english') as fp:
 
 #Contains the stopwords from the StopWords file
 stopWords = []
-with open('StopWords') as fp:
+with open('/u/cs401/Wordlists/StopWords') as fp:
     for line in fp:
         #Remove the \n char at the end
         line = line[:-1]
@@ -39,6 +38,8 @@ def preproc1( comment , steps=range(1,11)):
     '''
 
     modComm = ''
+    alreadyTagged = False
+    wordToLemma = {}
     #Remove new line characters
     if 1 in steps:
         modComm = comment.replace('\n', ' ')
@@ -147,10 +148,13 @@ def preproc1( comment , steps=range(1,11)):
                     
     #Tag all words with spacy  
     if 6 in steps:
+        alreadyTagged = True
         utt = nlp(modComm)
         modComm = ''
         for token in utt:
-            modComm = modComm + token.text + "/" + token.tag_ + " "
+            if(token.text != " "):
+                modComm = modComm + token.text + "/" + token.tag_ + " "
+                wordToLemma[token.text + "/" + token.tag_] = token.lemma_ + "/" + token.tag_
             
     
     #Remove stop words
@@ -177,23 +181,33 @@ def preproc1( comment , steps=range(1,11)):
     if 8 in steps:
         #Remove tags from all words
         words = modComm.split()
-        taglessComm = ""
-        #Stores all tags in order
-        for word in words:
+        #Step 6 already run before, use tags from there
+        if(alreadyTagged == True):
+            modComm = ""
+            for word in words:
+                if(wordToLemma[word][0] != "-"):
+                    modComm = modComm + wordToLemma[word] + " "
+                else:
+                    modComm = modComm + word + " "
+        #Step 6 not run, need to make tags
+        else:
+            taglessComm = ""
+            #Stores all tags in order
+            for word in words:
+                index = 0
+                while(word[index] != "/"):
+                    index = index + 1
+                taglessComm = taglessComm + word[:index] + " "
+            #Run spacy on comment to get lemmatizations
+            utt = nlp(taglessComm)
             index = 0
-            while(word[index] != "/"):
+            modComm = ""
+            for token in utt:
+                if(token.lemma_[0] != "-"):
+                    modComm = modComm + token.lemma_ + "/" + token.tag_ + " "
+                else:
+                    modComm = modComm + token.text + "/" + token.tag_ + " "
                 index = index + 1
-            taglessComm = taglessComm + word[:index] + " "
-        #Run spacy on comment to get lemmatizations
-        utt = nlp(taglessComm)
-        index = 0
-        modComm = ""
-        for token in utt:
-            if(token.lemma_[0] != "-"):
-                modComm = modComm + token.lemma_ + "/" + token.tag_ + " "
-            else:
-                modComm = modComm + token.text + "/" + token.tag_ + " "
-            index = index + 1
         
     if 9 in steps:
         words = modComm.split()
