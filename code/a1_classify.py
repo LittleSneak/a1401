@@ -35,7 +35,7 @@ def class31(filename):
     #Load the npy from the file
     data = np.load(filename)['arr_0']
     X = data[:, :173]
-    y = data[:, 173:]
+    Y = data[:, 173:]
         
     print(len(data), len(X), len(X[0]))
     print(len(data), len(Y), len(Y[0]))
