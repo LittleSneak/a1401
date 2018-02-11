@@ -51,6 +51,10 @@ def class31(filename):
     SVC(kernel = 'rbf', gamma = 2)
     predictions2 = rb.predict(X_test)
     
+    print(predictions1)
+    print(predictions2)
+    print(linear.predict(X_test))
+    
     #return (X_train, X_test, y_train, y_test, iBest)
 
 
