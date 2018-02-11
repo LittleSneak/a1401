@@ -301,22 +301,27 @@ def main( args ):
             #Go through every feature and add them
             for index2 in range(0, 144):
                 feats[index][29 + index2] = dataA[idx][index2]
+			feats[index][173] = 3
                 
         #Repeat for other 3 files
         elif(line['cat'] == "Center"):
             idx = idC[line['id']]
             for index2 in range(0, 144):
                 feats[index][29 + index2] = dataC[idx][index2]
+			feats[index][173] = 1
         
         elif(line['cat'] == "Left"):
             idx = idL[line['id']]
             for index2 in range(0, 144):
                 feats[index][29 + index2] = dataL[idx][index2]
+			feats[index][173] = 0
                 
         elif(line['cat'] == "Right"):
             idx = idR[line['id']]
             for index2 in range(0, 144):
                 feats[index][29 + index2] = dataR[idx][index2]
+			feats[index][173] = 2
+			
     np.savez_compressed( args.output, feats)
 
     
