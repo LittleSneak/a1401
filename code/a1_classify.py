@@ -204,7 +204,6 @@ def class32(X_train, X_test, y_train, y_test, iBest):
     for size in train_sizes:
         print("Processing size " + str(size))
         test_sz =  len(X_train) - size
-        print(test_sz)
         X_traint, X_testt, y_traint, y_testt = train_test_split(X_train, y_train, train_size=size, test_size = test_sz)
         #Keep the 1k train sizes for return
         if(size == 1000):
@@ -279,7 +278,7 @@ def class33(X_train, X_test, y_train, y_test, i, X_1k, y_1k):
     #Train 5 best features for 1k
     accList = []
     
-    print("Running classifier for 1k")
+    """print("Running classifier for 1k")
     
     print(best5_1k)
     print(len(best5_1k))
@@ -298,7 +297,7 @@ def class33(X_train, X_test, y_train, y_test, i, X_1k, y_1k):
     
     rows.append(accList)
     print(accList)
-    
+    """
     #Write to the csv file
     with open('a1_3.3.csv', 'w') as csvfile:
         writer = csv.writer(csvfile)
