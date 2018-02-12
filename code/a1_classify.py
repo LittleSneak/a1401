@@ -333,7 +333,7 @@ def class34( filename, i ):
     #Stores rows to write to file
     rows = []
     #Split data and iterate through all splits
-    kf = KFold(n_splits = 2, shuffle = True)
+    kf = KFold(n_splits = 5, shuffle = True)
     index = 1
     for train_index, test_index in kf.split(X):
         print("Processing split " + str(index))
