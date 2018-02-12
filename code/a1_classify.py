@@ -432,7 +432,6 @@ def class34( filename, i ):
             writer.writerow(row)
         writer.writerow(p_vals)
     
-    return 0
     
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Process each .')
