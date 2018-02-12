@@ -92,13 +92,13 @@ def class31(filename):
     #Run all 5 classifiers
     #Linear SVC. Using LinearSVC instead of SVC since it is much faster
     print("Processing Linear")
-    linear = LinearSVC(max_iter=5000)
+    linear = LinearSVC(max_iter=1000)
     linear.fit(X_train, y_train.ravel())
     predictions1 = linear.predict(X_test)
     
     #Radial basis function, gamma = 2
     print("Processing radial basis")
-    rb = SVC(kernel = 'rbf', gamma = 2, max_iter=5000)
+    rb = SVC(kernel = 'rbf', gamma = 2, max_iter=1000)
     rb.fit(X_train, y_train.ravel())
     predictions2 = rb.predict(X_test)
     
@@ -185,10 +185,10 @@ def class32(X_train, X_test, y_train, y_test, iBest):
     #Obtain the best classifier to use
     print("Beginning 3.2")
     if(iBest == 0):
-        classifier = linear = LinearSVC(max_iter=5000)
+        classifier = linear = LinearSVC(max_iter=1000)
         print("Linear chosen")
     elif(iBest == 1):
-        classifier = rb = SVC(kernel = 'rbf', gamma = 2, max_iter = 5000)
+        classifier = rb = SVC(kernel = 'rbf', gamma = 2, max_iter = 1000)
         print("Radial basis chosen")
     elif(iBest == 2):
         classifier = RandomForestClassifier(max_depth=5, n_estimators=10)
@@ -267,10 +267,10 @@ def class33(X_train, X_test, y_train, y_test, i, X_1k, y_1k):
         
     #Obtain the best classifier to use
     if(i == 0):
-        classifier = linear = LinearSVC(max_iter=5000)
+        classifier = linear = LinearSVC(max_iter=1000)
         print("Linear chosen")
     elif(i == 1):
-        classifier = rb = SVC(kernel = 'rbf', gamma = 2, max_iter = 5000)
+        classifier = rb = SVC(kernel = 'rbf', gamma = 2, max_iter = 1000)
         print("Radial basis chosen")
     elif(i == 2):
         classifier = RandomForestClassifier(max_depth=5, n_estimators=10)
@@ -349,13 +349,13 @@ def class34( filename, i ):
         #Run all 5 classifiers
         #Linear SVC. Using LinearSVC instead of SVC since it is much faster
         print("Processing Linear")
-        linear = LinearSVC(max_iter=5000)
+        linear = LinearSVC(max_iter=1000)
         linear.fit(X_train, y_train.ravel())
         predictions1 = linear.predict(X_test)
         
         #Radial basis function, gamma = 2
         print("Processing radial basis")
-        rb = SVC(kernel = 'rbf', gamma = 2, max_iter=5000)
+        rb = SVC(kernel = 'rbf', gamma = 2, max_iter=1000)
         rb.fit(X_train, y_train.ravel())
         predictions2 = rb.predict(X_test)
         
