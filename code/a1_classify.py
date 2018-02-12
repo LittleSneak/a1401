@@ -304,7 +304,6 @@ def class33(X_train, X_test, y_train, y_test, i, X_1k, y_1k):
     accList.append(str(accuracy(cm1k)))
     
     rows.append(accList)
-    print(accList)
     
     #Write to the csv file
     with open('a1_3.3.csv', 'w') as csvfile:
@@ -442,4 +441,4 @@ if __name__ == "__main__":
     results31 = class31(args.input)
     results32 = class32(results31[0], results31[1], results31[2], results31[3], results31[4])
     class33(results31[0], results31[1], results31[2], results31[3], results31[4], results32[0], results32[1])
-    #class34(args.input, results31[4])
+    class34(args.input, results31[4])
