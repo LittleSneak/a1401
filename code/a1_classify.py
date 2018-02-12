@@ -247,11 +247,13 @@ def class33(X_train, X_test, y_train, y_test, i, X_1k, y_1k):
         X_new32k = selector.fit_transform(X_train, y_train.ravel())
         #The indices of the features chosen by selectKBest
         chosenFeatures = selector.get_support(indices = True)
-        print("Features chosen: ", k, chosenFeatures)
+        print("Features chosen for 32k: ", k, chosenFeatures)
         pp = selector.pvalues_
         
         selector = SelectKBest(f_classif, k)
         X_new1k = selector.fit_transform(X_1k, y_1k.ravel())
+        chosenFeatures1k = selector.get_support(indices = True)
+        print("Features chosen for 1k: ", k, chosenFeatures1k)
         #Save X_new for 5 best features for step 2
         if(k == 5):
             best5_32k = X_new32k
