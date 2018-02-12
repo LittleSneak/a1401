@@ -442,4 +442,4 @@ if __name__ == "__main__":
     results31 = class31(args.input)
     results32 = class32(results31[0], results31[1], results31[2], results31[3], results31[4])
     class33(results31[0], results31[1], results31[2], results31[3], results31[4], results32[0], results32[1])
-    class34(args.input, results31[4])
+    #class34(args.input, results31[4])
